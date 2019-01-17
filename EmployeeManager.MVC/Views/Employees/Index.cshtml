@@ -1,0 +1,61 @@
+﻿@{
+    ViewBag.Title = "MAS Global Consulting";
+}
+
+<div class="row">
+    @using (Html.BeginForm("Index", "Employees"))
+    {
+        <div class="row" style="margin-top: 10px;">
+            <div class="alert-info">
+                Using this tool, you are able to lookup MAS Global Consulting employees. Enter the Id of the employee you are searching for in the text-box below and click the "Get employees" button in order to retrieve it, or leave it blank to get a complete list of employees:
+            </div>
+        </div>
+        <div class="row" style="margin: 10px 0 10px 0">
+            <div style="float: left;">
+                <span>Employee Id:</span>
+                <input type="text" name="Id" />
+            </div>
+            <div style="float: left; margin-left: 20px;">
+                <input type="submit" value="Get Employees" />
+            </div>
+        </div>
+
+        if (ViewBag.EmployeeList != null)
+        {
+            <div>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">Id</th>
+                            <th scope="col">Name</th>
+                            <th scope="col">Contract Type</th>
+                            <th scope="col">Role</th>
+                            <th scope="col">Role Description</th>
+                            <th scope="col">Base Salary</th>
+                            <th scope="col">Annual Salary</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var employee in ViewBag.EmployeeList)
+                        {
+                            <tr>
+                                <td>@employee.Id</td>
+                                <td>@employee.Name</td>
+                                <td>@employee.ContractTypeName</td>
+                                <td>@employee.RoleName</td>
+                                <td>@employee.RoleDescription</td>
+                                <td>@employee.BaseSalary</td>
+                                <td>@employee.AnnualSalary</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        }
+        else
+        {
+            <div class="alert-warning">There are no results for your search</div>
+        }
+
+    }
+</div>
